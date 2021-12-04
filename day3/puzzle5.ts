@@ -8,31 +8,24 @@ const data =
 
 let transposed = data[0].map((_, colIndex) => data.map(row => row[colIndex]))
 
-let binary =
-    transposed
-        .map((set) => {
-            let length1 = set.filter(element => element === '1').length
-            if ((set.length/2) > length1) {
-                return '0'
-            } 
-            else {
-                return '1'
-            }
-        })
+let gammaRateBinary: string[] = []
+let epsilonRateBinary: string[] = []
 
-let binaryFlipped =
-    binary
-    .map(element => {
-        if (element === '1') {
-            return '0'
-        }
+transposed
+    .map((set) => {
+        let length1 = set.filter(element => element === '1').length
+        if ((set.length/2) > length1) {
+            gammaRateBinary.push('0')
+            epsilonRateBinary.push('1')
+
+        } 
         else {
-            return '1'
+            gammaRateBinary.push('1')
+            epsilonRateBinary.push('0')
         }
     })
 
-let gammaRate = parseInt(binary.join(""),2)
-let epsilonRate = parseInt(binaryFlipped.join(""),2)
+let gammaRate = parseInt(gammaRateBinary.join(""),2)
+let epsilonRate = parseInt(epsilonRateBinary.join(""),2)
     
-
 console.log(`${gammaRate}, ${epsilonRate}, ${gammaRate*epsilonRate}`)
