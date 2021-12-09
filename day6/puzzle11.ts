@@ -6,15 +6,9 @@ const data =
         .split(",")
         .map(entry => parseInt (entry))
 
-const testData =
-    fs.readFileSync("C:/Users/jonat/source/repos/aoc2021/day6/testInput.txt", 'utf8')
-        .replace("\n","")
-        .split(",")
-        .map(entry => parseInt (entry))
-
 let fishies: number[] = []
 
-for (let i = 0; i < 80; i++){
+for (let i = 0; i < 256; i++){
     console.log(`After ${i+1} days: ${fishies.length}`)
     let currentFishies: number[]
     if (i === 0){

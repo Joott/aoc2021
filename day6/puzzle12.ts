@@ -6,12 +6,6 @@ const data =
         .split(",")
         .map(entry => parseInt (entry))
 
-const testData =
-    fs.readFileSync("C:/Users/jonat/source/repos/aoc2021/day6/testInput.txt", 'utf8')
-        .replace("\n","")
-        .split(",")
-        .map(entry => parseInt (entry))
-
 const createEmptyFishies: () => Record<number,number> = () => {
     return(
         {
