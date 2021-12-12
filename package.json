@@ -21,6 +21,8 @@
   },
   "dependencies": {
     "@types/node": "^16.11.11",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "queue-typescript": "^1.0.1",
+    "stack-typescript": "^1.0.4"
   }
 }
