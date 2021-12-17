@@ -31,6 +31,15 @@ data
         graph.addUndirectedEdge(edge[0],edge[1])
     })
 
+const containsSmallDuplicate = (path: string[]) => {
+    let smalls =
+        path
+            .filter(n => {
+                return graph.getNodeAttribute(n,'Type')  === 'Small'
+            })
+    return (smalls.length > (new Set(smalls).size))
+}
+
 const elongatePath = (currentPath: string[]) => { 
     let neighbours = graph.neighbors(currentPath[currentPath.length - 1])
     let paths: string[][] = []
@@ -39,6 +48,9 @@ const elongatePath = (currentPath: string[]) => {
             let newPath = Object.assign([],currentPath)
             if (graph.getNodeAttribute(neighbour,'Type') === 'Small'){
                 if (!new Set(currentPath).has(neighbour)) {
+                    newPath.push(neighbour)
+                }
+                else if ((!containsSmallDuplicate(currentPath)) && neighbour != 'start' && neighbour != 'end') {
                     newPath.push(neighbour)
                 }
             } else {
@@ -51,7 +63,7 @@ const elongatePath = (currentPath: string[]) => {
     return paths
 }
 
-const returnAllPaths = (currentPaths: string[][]): string[][] => {
+const returnAllPaths = (currentPaths: string[][], previous: string[][]): string[][] => {
     let newPaths: string[][] = []
     currentPaths
         .map(path => {
@@ -67,11 +79,11 @@ const returnAllPaths = (currentPaths: string[][]): string[][] => {
             .filter(path => {
                 return !(path[path.length - 1] === 'end')
             })
-    if (unfinishedPaths.length > 0) {
-        return returnAllPaths(newPaths)
+    if (unfinishedPaths.length > 0 && previous != currentPaths) {
+        return returnAllPaths(newPaths, currentPaths)
     } else {
         return newPaths
     }
 }
 
-console.log(returnAllPaths([['start']]).length)
+console.log(returnAllPaths([['start']],[]).length)
