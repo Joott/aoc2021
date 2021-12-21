@@ -54,6 +54,7 @@ const insertInsertz = (input: string[][], patternz: InsertionPattern[]) => {
 const lööpz = (input: string[], patternz: InsertionPattern[], steps: number) => {
     let currentInput = input
     for (let i=0; i < steps; i++) {
+        console.log(i)
         let nextInput = 
             insertInsertz(windowed(currentInput),patternz)
             .join("")
@@ -83,4 +84,4 @@ const countStringElements = (str: string[]) => {
     return (max-min)
 }
 
-console.log (countStringElements(lööpz(input,patterns,10)))
+console.log (countStringElements(lööpz(input,patterns,40)))
